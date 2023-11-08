@@ -1,0 +1,145 @@
+Clase AplicacionPlanCuidadoEnfermeria
+    
+    GestorPlanCuidado gestor = nuevo GestorPlanCuidado
+    
+    Mientras que  (verdadero)
+        array opciones = mostrar ("1. Crear un nuevo plan de cuidados", "2. Ver planes de 
+        cuidados existentes", "3. Salir")
+        
+        int eleccion = mostrarOpciones("Sistema de plan de cuidados de enfermería", opciones)
+
+        si eleccion == 0 entonces
+            crearPlanCuidado()
+        sino si eleccion == 1 entonces
+            verPlanesCuidado()
+        sino si eleccion == 2 entonces
+            salirDelPrograma()
+        sino
+            fin método
+    fin mientras que
+        
+Fin clase
+
+-------------------------------------------------------------------------------------------------
+
+Clase GestorPlanCuidado
+    Atributos
+        planesCuidado: ArrayList de PlanCuidadoEnfermeria
+
+    Constructor
+        GestorPlanCuidado()
+            planesCuidado = nuevo ArrayList de PlanCuidadoEnfermeria
+
+    Método crearPlanCuidado()
+        Solicitar nombre del paciente
+        Si nombre del paciente no es nulo
+            Crear un nuevo PlanCuidadoEnfermeria con el nombre del paciente
+            Mientras que sea verdadero
+                Mostrar un menú con opciones para agregar tareas de cuidado, antecedentes o finalizar el plan
+                Según la opción elegida
+                    Caso 0: 
+                        Solicitar y agregar una nueva tarea de cuidado al plan
+                    Caso 1:
+                        Llamar al método recolectarAntecedentes() pasando el plan de cuidado como parámetro
+                    Caso 2:
+                        Agregar el plan de cuidado a la lista de planesCuidado y mostrar un mensaje de éxito
+                    Predeterminado:
+                        Salir del método
+            Fin Mientras
+        Fin Si
+
+    Método verPlanesCuidado()
+        Crear una cadena de texto para almacenar los planes de cuidado existentes
+        Si la lista de planesCuidado está vacía
+            Agregar un mensaje indicando que no hay planes de cuidado
+        Sino
+            Por cada plan en la lista de planesCuidado
+                Agregar una representación de cadena del plan a la cadena de texto
+            Fin Por
+        Mostrar la cadena de texto en un cuadro de diálogo
+
+    Método recolectarAntecedentes(PlanCuidadoEnfermeria planCuidado)
+        Mientras que sea verdadero
+            Mostrar un menú para seleccionar el tipo de antecedentes a agregar
+            Según la opción elegida
+                Caso 0:
+                    Agregar un antecedente personal al plan de cuidado
+                Caso 1:
+                    Agregar un antecedente familiar al plan de cuidado
+                Caso 2:
+                    Agregar un antecedente quirúrgico al plan de cuidado
+                Caso 3:
+                    Agregar un antecedente alérgico al plan de cuidado
+                Caso 4:
+                    Agregar un antecedente toxicológico al plan de cuidado
+                Predeterminado:
+                    Salir del método
+            Fin Según
+        Fin Mientras
+
+    Método agregarAntecedente(TipoAntecedentes tipo, String antecedente)
+        Según el tipo de antecedentes
+            Caso PERSONALES:
+                Agregar el antecedente a la lista de antecedentes personales
+            Caso FAMILIARES:
+                Agregar el antecedente a la lista de antecedentes familiares
+            Caso QUIRÚRGICOS:
+                Agregar el antecedente a la lista de antecedentes quirúrgicos
+            Caso ALÉRGICOS:
+                Agregar el antecedente a la lista de antecedentes alérgicos
+            Caso TOXICOLÓGICOS:
+                Agregar el antecedente a la lista de antecedentes toxicológicos
+        Fin Según
+Fin Clase
+
+--------------------------------------------------------------------------------------------------
+
+Clase PlanCuidadoEnfermeria
+    Atributos
+        nombrePaciente: String
+        tareasCuidado: ArrayList de String
+        antecedentesPersonales: ArrayList de String
+        antecedentesFamiliares: ArrayList de String
+        antecedentesQuirurgicos: ArrayList de String
+        antecedentesAlergicos: ArrayList de String
+        antecedentesToxicologicos: ArrayList de String
+
+    Constructor
+        PlanCuidadoEnfermeria(String nombrePaciente)
+            Asignar nombrePaciente con el valor proporcionado
+            Inicializar las listas de tareas de cuidado y antecedentes con listas vacías
+
+    Método agregarTareaCuidado(String tarea)
+        Agregar la tarea a la lista de tareas de cuidado
+
+    Método agregarAntecedente(TipoAntecedentes tipo, String antecedente)
+        Según el tipo de antecedentes
+            Caso PERSONALES:
+                Agregar el antecedente a la lista de antecedentes personales
+            Caso FAMILIARES:
+                Agregar el antecedente a la lista de antecedentes familiares
+            Caso QUIRÚRGICOS:
+                Agregar el antecedente a la lista de antecedentes quirúrgicos
+            Caso ALÉRGICOS:
+                Agregar el antecedente a la lista de antecedentes alérgicos
+            Caso TOXICOLÓGICOS:
+                Agregar el antecedente a la lista de antecedentes toxicológicos
+        Fin Según
+
+    Método toString()
+        Retornar una cadena de texto que contiene el nombre del paciente, las tareas de cuidado y los diferentes tipos de antecedentes
+
+    Método obtenerAntecedentes(TipoAntecedentes tipo)
+        Según el tipo de antecedentes
+            Caso PERSONALES:
+                Retornar la lista de antecedentes personales
+            Caso FAMILIARES:
+                Retornar la lista de antecedentes familiares
+            Caso QUIRÚRGICOS:
+                Retornar la lista de antecedentes quirúrgicos
+            Caso ALÉRGICOS:
+                Retornar la lista de antecedentes alérgicos
+            Caso TOXICOLÓGICOS:
+                Retornar la lista de antecedentes toxicológicos
+        Fin Según
+Fin Clase
